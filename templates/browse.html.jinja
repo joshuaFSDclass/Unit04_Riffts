@@ -14,14 +14,14 @@
  </h1>
 <main class =" grid grid-cols-3 gap-2 ml-3 mt-10">
     {% for x in products %}
-        <div class="grid ">
+        <a href="/product/{{ x['ID']}}" class="grid ">
             <img class="h-50 mx-auto" src="{{ x['Image'] }}"> <br>
             {{x ["Name"]}}<br>
             ${{x ["Price"]}}<br>
             {{x["Brand"]}}<br>
             {{x["Size"]}}<br>
             {{x["Category"]}}
-        </div>
+        </a>
     {%endfor%}
 </main>
  
