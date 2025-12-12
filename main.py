@@ -20,6 +20,8 @@ def connect_db():
     return conn
 
 
+
+
 @app.route("/")
 def index():
     return render_template("Homepage.html.jinja")
@@ -52,3 +54,11 @@ def product_page(product_id):
     connection.close()
 
     return render_template("product.html.jinja", product = result)
+
+@app.route("/register")
+def register():
+    return render_template("register.html.jinja")
+
+@app.route("/login")
+def login():
+    return render_template("login.html.jinja")
