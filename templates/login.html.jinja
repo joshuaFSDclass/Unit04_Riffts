@@ -8,14 +8,15 @@
 
 </head>
 <body>
+{% include "components/navbar.html.jinja" %}
 <main>
     
     <form class = "items-center  m-20 shadow-black shadow-md mr-160 ml-160 p-4 mt-50">
         <label> Username </label>
-        <input type = "username" id="email" >
+        <input required type = "username" id="email" >
         <br>
         <label>Password</label>
-        <input type = "password " minlength="8" class = "border-s-4px" >
+        <input required type = "password ">
         <br>
         <button class = "shadow-md bg-gray-200 p-2 ml-4 mt-2 corsur-pointer">Login</button>
     </form>

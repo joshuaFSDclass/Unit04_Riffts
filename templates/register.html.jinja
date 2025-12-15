@@ -8,15 +8,26 @@
 
 </head>
 <body>
-    <form class = "items-center  m-20 shadow-black shadow-md mr-160 ml-160 p-4 mt-50">
+{% include "components/navbar.html.jinja" %}
+
+{%for message in get_flashed_messages() %}
+<li class = "text-center">{{ message }}</li>
+{% endfor %}
+
+    <form  method= "post" class = "items-center  m-20 shadow-black shadow-md mr-160 ml-160 p-4 mt-50">
+        <label>Name</label>
+        <input required type = "text" name = "name">
+        <br>
         <label> email </label>
-        <input type = "username" id="email" >
+        <input required type = "username" name ="email" >
         <br>
         <label>Password</label>
-        <input type = "password " minlength="8" class = "border-s-4px" >
+        <input required type = "password" name = "password" >
         <br>
         <label>Password confermation </label>
-        <input type = "password " minlength="8" class = "border-s-4px" >
+        <input required type = "password" name = "confirm_password">
+         <label>birthday</label>
+        <input required type = "date" name = "birthday">
         <br>
         <button class = "shadow-md bg-gray-200 p-2 ml-4 mt-2 corsur-pointer">Login</button>
     </form>
