@@ -7,27 +7,27 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
 </head>
-<body>
+<body class="bg-gray-200">
 {% include "components/navbar.html.jinja" %}
 
 {%for message in get_flashed_messages() %}
 <li class = "text-center">{{ message }}</li>
 {% endfor %}
 
-    <form  method= "post" class = "items-center  m-20 shadow-black shadow-md mr-160 ml-160 p-4 mt-50">
+    <form  method= "post" class = "items-center bg-white m-20 shadow-black shadow-md mr-160 ml-160 p-4 mt-50">
         <label>Name</label>
-        <input required type = "text" name = "name">
+        <input  class= "border border-black rounded" required type = "text" name = "name">
         <br>
         <label> email </label>
-        <input required type = "username" name ="email" >
+        <input class= "border border-black rounded" required type = "username" name ="email" >
         <br>
         <label>Password</label>
-        <input required type = "password" name = "password" >
+        <input class= "border border-black rounded" required type = "password" name = "password" >
         <br>
         <label>Password confermation </label>
-        <input required type = "password" name = "confirm_password">
+        <input class= "border border-black rounded" required type = "password" name = "confirm_password">
          <label>birthday</label>
-        <input required type = "date" name = "birthday">
+        <input class= "border border-black rounded" required type = "date" name = "birthday">
         <br>
         <button class = "shadow-md bg-gray-200 p-2 ml-4 mt-2 corsur-pointer">Login</button>
     </form>

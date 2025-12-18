@@ -1,6 +1,21 @@
-<nav class = "justify-end flex-col p-4 m-8 md:flex-row shadow-black shadow-md ">
-    <a hrer="/">Home</a>
-    <a href="/browse" class ="ml-275 p-4 text-white">Browse</a>
-    <a href="/login" class = "p-4 bg-yellow-400 rounded text-white" >Login</a>
-    <a href="/register" class = "p-4 bg--400 rounded text-white"> Sign UP </a>
+<nav class = "flex p-4 m-8 shadow-black shadow-md justify-between ">
+    <a href="/" class= "bg-stone-400 rounded text-white text-center p-2" >Riffts</a>
+    <div class =" flex gap-2">
+        <a href="/browse" class ="bg-stone-400 rounded text-white text-center p-2">Browse</a>
+    {% if  not current_user.is_authenticated%}
+        <a href="/login" class = "p-2 bg-stone-400 rounded text-white  " >Login</a>
+    {%else%}
+        <div>
+            <button class="bg-stone-400 rounded text-white text-center p-2 group relative ">
+                Hi, {{current_user.name}}
+                <div class=" bg-gray-200 border border-gray-400 p-2 text-gray-400 absolute top-full right-0 hidden group-hover:block ">
+                    <a herf="/logout" class="   hover:border-2">Logout</a>
+                    <a href="#" class="  hover:border-2">Settings</a>
+                    <a href="Cart" class="  hover:border-2">Cart</a>
+                </div>
+            </button>
+        </div>
+    {%endif%}
+
+    </div>
 </nav>
