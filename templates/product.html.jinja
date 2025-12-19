@@ -24,10 +24,27 @@
         {{product["Description"]}}
         <br>
 
-        <button class ="bg-red-600 pl-16 pr-16 pt-4 pb-4 gap-4 text-white ml-100 mt-45 text-3xl cursor-pointer">
-            Add to Cart
-        </button>
-        
+        <form class="flex-col-2 justify-end" method="post" action="/product/{{product['ID']}}/add_to_cart">
+             <div>  
+                <label>
+                    Raitings
+                </label>
+                <select class="w-full rounded-lg border border-gray-300 size-2 bg-white px-3 py-2
+            focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                </select >
+            </div>
+            <div>
+                <input class= "border-2 border-gray-300  size-10" type="number" name = "QTY" value= "1" min="1" max="8">
+                <button class ="bg-red-600 text-center border-2 border-orange-600 rounded pl-16 pr-16 pt-4 pb-4 gap-4 text-white  mt-45 text-2xl cursor-pointer ">
+                    Add to Cart
+                </button>
+            </div>
+        </form>
     </div>
     
     

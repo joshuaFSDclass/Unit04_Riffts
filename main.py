@@ -1,5 +1,5 @@
 from flask import Flask, render_template , request, flash ,redirect, abort
-from flask_login import LoginManager, login_user, logout_user, login_required
+from flask_login import LoginManager, login_user, logout_user, login_required,current_user
 import pymysql
 
 from dynaconf import Dynaconf
@@ -94,6 +94,28 @@ def product_page(product_id):
 
     return render_template("product.html.jinja", product = result)
 
+@app.route("/product/<product_id>/add_to_cart", methods =['POST'])
+@login_required
+def add_to_cart(product_id):
+
+    quantity = request.form['QTY']
+
+    connection = connect_db()
+    # This variable connects the page to the data base 
+    cursor =connection.cursor()
+
+    cursor.execute(
+        """INSERT INTO `Cart` (`Quantity`, `ProductID`,`UserID`)  
+        VALUES (%s, %s, %s)
+        ON DUPLICATE KEY UPDATE
+        `Quantity` = `Quantity` + %s
+        """, (quantity, product_id, current_user.id, quantity))
+
+    connection.close()
+    return redirect("/cart")
+
+
+
 @app.route("/register", methods = ['POST', 'GET'])
 def register():
     if request.method == 'POST':
@@ -137,6 +159,7 @@ def register():
 
 @app.route("/login", methods = ['POST', 'GET'] )
 def login():
+
     if request.method == 'POST':
 
         email = request.form ['email']
@@ -162,6 +185,7 @@ def login():
             return redirect('/browse')
 
     return render_template("login.html.jinja")
+
 @app.route("/logout", methods = ['POST', 'GET'])
 @login_required
 def logout():
