@@ -56,8 +56,6 @@ def connect_db():
     return conn
 
 
-
-
 @app.route("/")
 def index():
     return render_template("Homepage.html.jinja")
@@ -113,7 +111,6 @@ def add_to_cart(product_id):
 
     connection.close()
     return redirect("/cart")
-
 
 
 @app.route("/register", methods = ['POST', 'GET'])
@@ -191,3 +188,68 @@ def login():
 def logout():
     logout_user()
     return redirect("/")
+
+@app.route("/cart")
+@login_required
+def Cart():
+    connection = connect_db()
+
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        SELECT * FROM `Cart`
+        JOIN `Product` ON `Product` . `ID` = `Cart` . `ProductID`
+        WHERE `UserID` = %s
+        """, (current_user.id))
+    
+    result = cursor.fetchall()
+    
+    total = 0 
+
+    for item in result:
+        total += item["Price"] * item["Quantity"]
+    connection.close()
+    return render_template("Cart.html.jinja", cart = result, total = total)
+
+@app.route("/cart/<product_id>/update", methods=["POST"])
+def update_cart(product_id):
+    new_qty = request.form['qty']
+
+    
+
+    connection = connect_db()
+
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        UPDATE `Cart`
+        SET `Quantity` = %s
+        WHERE `ProductID` = %s AND `UserID` = %s
+
+        """, (new_qty, product_id, current_user.id)
+
+    )
+    connection.close()
+    
+    return redirect("/cart")
+
+
+@app.route("/cart/<product_id>/remove", methods = ["POST"])
+@login_required
+def remove_item(product_id):
+
+    connection = connect_db()
+
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        DELETE FROM `Cart`
+        WHERE `ProductID` = %s AND `UserID` = %s
+        
+        """,(product_id, current_user.id)
+    )
+    connection.close()
+
+    return redirect("/cart")
