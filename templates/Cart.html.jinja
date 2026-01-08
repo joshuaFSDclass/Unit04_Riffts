@@ -12,10 +12,10 @@
 <h1 class =" ml-135 text-8xl m-8 text-center bg-gray-300 shadow-md shadow-gray-400 w-100 text-white text-shadow-lg" >Cart</h1>
 
 <main class ="flex gap-50">
-    <div class="ml-40 rounded m-4 p-2 rounded border-1 border-black shadow-black p-20 border-b pb-6 mb-6">
+    <div class="ml-15 rounded m-4 p-2 rounded border-1 border-black shadow-black p-20 border-b pb-6 mb-6">
         {%for x in cart%}
             <a href="/cart/{{ x['ID']}}" class="grid-cols cols-4 gap-4 justify-center">
-                <img class="h-20 mx-auto mt-4 h-85 w-85 " src="{{ x['Image'] }}"> <br>
+                <img class="mx-auto mt-4 h-100 item-center" src="{{ x['Image'] }}"> <br>
                 <p>{{x ["Name"]}}</p>
                 <p>${{x ["Price"] * x["Quantity"]}}</p>
                
@@ -35,6 +35,7 @@
     <div class="border border-gray-800 shadow-gray-md rounded justify-end mt-4">
         <h1 class="text-4xl m-4 "> Order Summary </h1>
         <h2 class="mr-100 p-4">Total cost: ${{total}} </h2>
+        <a href="/checkout" class=" p-4 text-white bg-gray-300 text-shadow-lg rounded text-xl justify-center">Checkout</a>
     </div>
 </main>
 

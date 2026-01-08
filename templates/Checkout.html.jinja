@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+<body>
+{% include "components/navbar.html.jinja" %}
+<h1 class =" ml-135 text-8xl m-8 text-center bg-gray-300 shadow-md shadow-gray-400 w-100 text-white text-shadow-lg" >Checkout</h1>
+
+<main class ="flex gap-20 ">
+    <div class="grid-cols cols-4 ml-40 rounded m-4 p-2 rounded border-1 border-black shadow-black p-20 border-b pb-6 mb-6">
+        {%for x in cart%}
+            <a href="/cart/{{ x['ID']}}" class="grid-cols cols-4 gap-4 justify-center">
+                <img class="mx-auto mt-4 h-100 item-center" src="{{ x['Image'] }}"> <br>
+                <p>{{x ["Name"]}}</p>
+                <p>${{x ["Price"] * x["Quantity"]}}</p>
+               
+            </a>
+            <div class = "rounded border-1 bordder-black bg-gray-200">
+                <form class=" shadow-gray-700 p-4 " method = "post" action = "/cart/{{x['ProductID']}}/update">
+                    <input class = "p-2 bg-white w-14" type = "number" name = "qty" value="{{x ['Quantity']}}">
+                </form>
+
+            </div>
+            
+        {%endfor%}
+    </div>
+    
+    <div class="border border-gray-800 shadow-gray-md rounded justify-end mt-4">
+        <h1 class="text-4xl m-4 "> Order Summary </h1>
+        <h2 class="mr-100 p-4">Total cost: ${{total}} </h2>
+        <div class="mt-20x p-4">
+            <form>
+                <label class = "bg-gray-300 rounded p-1" >Shipping Address</label>
+                <input class = "bg-gray-30 border-1 rounded mb-4"type="text">
+                
+                <legend >Payment method</legend>
+                <input class = "p-2" type ="radio" name="method_chosen" value ="Paypal"><label> Paypal</label>
+                <br>
+                <input class = "p-2" type ="radio" name="method_chosen" value ="CashApp"><label> CashApp</label>
+                <br>
+                <input class = "p-2" type ="radio" name="method_chosen" value ="Credit"><label> Credit</label>
+                <br>
+                <input class = "p-2" type ="radio" name="method_chosen" value ="VISA"><label> VISA</label>
+
+                <label></label>
+                <input>
+            </form>
+        </div>
+        <div>
+            <form method ="post" action = "">
+                <button type ="submit" class ="text-4xl p-4 text-center border-1 border-black shadow-lg shadow-gray-400 text-white text-shadow-lg rounded m-2 bg-red-600">Place Order</button>
+            </form>
+        </div>
+    </div>
+   
+</main>
+
+
+</body>
+
+</html>
