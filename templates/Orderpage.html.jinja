@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+<body class = " flex flex-col justify-center bg-linear-to-r from-white to-orange-200 gap-2 bg-gray-200">
+{% include "components/navbar.html.jinja" %}
+<h1 class="text-center text-stone-400 text-shadow-lg text-5xl">
+Past Orders
+</h1>
+<div class=" flex flex-col cols-4 justify-content bg-stone-400 ml-4 mr-4 shadow-stone-600 shadow-lg text-white text-shadow-lg p-4 rounded border-black border-1 gap-4">
+    {%for Sale in Orders%}
+        <div class="grid grid-cols-2 border-2 border-white rounded p-2 " >
+            <div>
+                <h1 class = "mt-2 text-2xl">Order ID: {{Sale["ID"]}}</h1>
+                <h1 >Date of Order: {{Sale["Timestamp"].strftime('%x')}}</h1>
+            </div>
+            <div>
+                <h1 class = "mt-2">Quantity: {{Sale["Quantity"]}}</h1>
+                <h1 class = "text-xl">Total: ${{Sale["Total"]}}</h1>
+            </div>
+        </div>
+        <div class=" border-2 border-white rounded bg-white p-2">
+           
+        </div>
+        
+    {%endfor%}
+</div>
+</body>

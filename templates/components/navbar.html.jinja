@@ -7,22 +7,26 @@
         font-style: normal;
     }
 </style>
-<nav class="flex p-4 m-8 shadow-black shadow-md justify-between ">
+<nav class="flex p-8 bg-red-700 shadow-black shadow-md justify-between ">
 
-    <a href="/" class="rounded text-red-600 text-center item-center pt-1 text-shadow-md text-4xl fruktur-regular">Riffts</a>
-    <div class=" flex gap-2">
-        <a href="/browse" class="bg-stone-400 rounded text-white text-center p-2 pt-2">Browse</a>
+    <a href="/" class="rounded text-white text-center item-center pt-1 text-shadow-md text-6xl fruktur-regular">Riffts</a>
+    <div class=" flex items-center gap-10">
+        <a href="/browse" class=" mt-4 text-white text-center hover:text-red-700 p-2 text-xl hover:bg-white hover:rounded ">Browse</a>
         {% if not current_user.is_authenticated%}
-        <a href="/login" class="p-2 bg-stone-400 rounded text-white  ">Login</a>
+        <a href="/login" class="mt-4 text-white flex items-center text-xl gap-2">
+  <span class="icon-[mdi--account] text-xl"></span>
+  Login
+</a>
         {%else%}
         <div>
-            <button class="bg-stone-400 rounded text-white text-center p-2 group relative ">
-                Hi, {{current_user.name}}
+            <button class="text-white text-center mt-4 mr-2 group relative text-center text-xl hover:text-red-700 p-2 hover:bg-white hover:rounded">
+                Hi {{current_user.name}} 
                 <div
-                    class=" flex flex-col justify-center gap-2 item-center bg-gray-200 border border-gray-400 p-2 text-gray-400 text-shadow-lg absolute top-full right-0 hidden group-hover:block ">
+                    class=" flex flex-col justify-center gap-2 item-center bg-gray-200 border border-gray-400 p-2 text-gray-400 text-shadow-lg  rounded absolute top-full right-0 hidden group-hover:block ">
                     <a href="/logout" class="   hover:border-2">Logout</a>
                     <a href="#" class="  hover:border-2">Settings</a>
                     <a href="/cart" class="  hover:border-2">Cart</a>
+                    <a href="/OrderPage" class="  hover:border-2">Orders</a>
                 </div>
             </button>
         </div>

@@ -253,6 +253,7 @@ def remove_item(product_id):
     return redirect("/cart")
 
 @app.route("/checkout", methods = ["POST", "GET"])
+@login_required
 def checkout():
     connection = connect_db()
 
@@ -289,3 +290,30 @@ def checkout():
 @app.route("/thankyou")
 def thankyou():
     return render_template("thankyou.html.jinja")
+
+@app.route("/OrderPage")
+@login_required
+def OrderPage():
+    connection = connect_db()
+
+    cursor = connection.cursor()
+
+    cursor.execute(
+    """
+    SELECT 
+        `Sale`.`ID`,
+        `Sale`.`Timestamp`,
+        SUM(`SaleCart`.`Quantity`) AS 'Quantity',
+        SUM(`SaleCart`.`Quantity` * `Product`.`Price`) AS 'Total'
+    FROM `Sale`
+    JOIN `SaleCart` ON `SaleCart`.`SaleID` = `Sale`.`ID`
+    JOIN `Product` ON `Product`.`ID` = `SaleCart`.`ProductID`
+    WHERE `UserID` = %s
+    GROUP BY `Sale`.`ID`;
+    """,(current_user.id, ))
+
+    result = cursor.fetchall()
+
+    connection.close()
+
+    return render_template("Orderpage.html.jinja", Orders = result)
