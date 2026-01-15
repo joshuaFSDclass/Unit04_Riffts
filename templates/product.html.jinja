@@ -13,41 +13,77 @@
 <div class= "grid grid-cols-2 bg-linear-to-r from-white to-orange-200">
     <div class = "flex flex-col items-center ">
         <img class="h-100 mt-10" src="{{ product['Image'] }}">
-        <div >
+        <div>
             {{product["Name"]}}
+            <h1 class="pt2">
+                {{avgReview}}
+                <svg  class="inline" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 128 128"><path fill="#fdd835" d="m68.05 7.23l13.46 30.7a7.05 7.05 0 0 0 5.82 4.19l32.79 2.94c3.71.54 5.19 5.09 2.5 7.71l-24.7 20.75c-2 1.68-2.91 4.32-2.36 6.87l7.18 33.61c.63 3.69-3.24 6.51-6.56 4.76L67.56 102a7.03 7.03 0 0 0-7.12 0l-28.62 16.75c-3.31 1.74-7.19-1.07-6.56-4.76l7.18-33.61c.54-2.55-.36-5.19-2.36-6.87L5.37 52.78c-2.68-2.61-1.2-7.17 2.5-7.71l32.79-2.94a7.05 7.05 0 0 0 5.82-4.19l13.46-30.7c1.67-3.36 6.45-3.36 8.11-.01"/><path fill="#ffff8d" d="m67.07 39.77l-2.28-22.62c-.09-1.26-.35-3.42 1.67-3.42c1.6 0 2.47 3.33 2.47 3.33l6.84 18.16c2.58 6.91 1.52 9.28-.97 10.68c-2.86 1.6-7.08.35-7.73-6.13"/><path fill="#f4b400" d="M95.28 71.51L114.9 56.2c.97-.81 2.72-2.1 1.32-3.57c-1.11-1.16-4.11.51-4.11.51l-17.17 6.71c-5.12 1.77-8.52 4.39-8.82 7.69c-.39 4.4 3.56 7.79 9.16 3.97"/></svg>
+            </h1>
+
             <br>
             ${{product["Price"]}}
             <br>
         </div>
     </div>
-    <div class = " text-l m-5 p-5 bg-white">
-        {{product["Description"]}}
+    <div class = " text-l m-5 p-5 bg-white rounded">
+        <h1 class="text-lg bg-stone-600 text-white p-4 rounded underline" >Description</h1>
+        <h1 class="text-lg bg-stone-600 text-white p-4 rounded">{{product["Description"]}}</h1>
         <br>
-
-        <form class="flex-col-2 justify-end" method="post" action="/product/{{product['ID']}}/add_to_cart">
-             <div>  
-                <label>
-                    Raitings
-                </label>
-                <select class="w-full rounded-lg border border-gray-300 size-2 bg-white px-3 py-2
-            focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                    <li>5</li>
-                </select >
-            </div>
+        <form class="flex-col-2 justify-end reounded" method="post" action="/product/{{product['ID']}}/add_to_cart">
             <div>
-                <input class= "border-2 border-gray-300  size-10" type="number" name = "QTY" value= "1" min="1" max="8">
-                <button class ="bg-red-600 text-center border-2 border-orange-600 rounded p-5 gap-4 text-white  mt-45 text-2xl cursor-pointer ">
+                <input class= "border-2 border-gray-300 size-10" type="number" name = "QTY" value= "1" min="1" max="8">
+                <button class ="bg-red-600 text-center border-2 border-orange-600 rounded p-3 gap-4 text-white  mt-5 text-2xl cursor-pointer ">
                     Add to Cart
-                </button>
+                </button> 
             </div>
         </form>
     </div>
     
+    </div>
+    <div class="p-4 bg-stone-400 rounded">
     
+        <h1 class ="text-4xl pt-5 text-stone-700">Place a Review</h1>
+        <h1>Average Review: {{avgReview}}</h1>
+        <form class ="flex flex-col gap-1 justify-center mt-2 " action="/product/{{product['ID']}}/review" method="post">
+        <div class ="flex flex-col gap-2 text-stone-700">
+            <h1 class="underline text-xl">Ratings</h1>
+            <div>
+                <label>1 </label><input type= "radio" name="Rattings" value = "1">
+            </div>
+            <div>
+                <label>2 </label><input type= "radio" name="Rattings" value = "2">
+            </div>
+            <div>
+                <label>3 </label><input type= "radio" name="Rattings" value = "3">
+            </div>
+            <div>
+                <label>4 </label><input type= "radio" name="Rattings" value = "4">
+            </div>
+            <div>
+                <label>5 </label><input type= "radio" name="Rattings" value = "5">
+            </div>    
+        </div>
+        <div class = "flex flex-col">
+            <label>Comments</label><input class="boreder-black w-100 h-30 border-2 border-stone-800" type="text area" name ="WrittenReview">
+        </div>
+            <button class="p-2 text-white bg-red-600 rounded" value="submit">Submit review</button>
+        </form>
+
+        <div class = "text-lg text-white bg-stone-600 p-4 mt-4 rounded">   
+            
+            <h1 class = "text-2xl text-shadow-xl">Previous reviews</h1>
+            <div class = "border-stone-700 border-2 p-2">
+            {%for items in reviews%}
+                <h1>Username: {{items["Name"]}}</h1>
+                <h1 class="pt-2">{{items["Rattings"]}} <svg  class="inline" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 128 128"><path fill="#fdd835" d="m68.05 7.23l13.46 30.7a7.05 7.05 0 0 0 5.82 4.19l32.79 2.94c3.71.54 5.19 5.09 2.5 7.71l-24.7 20.75c-2 1.68-2.91 4.32-2.36 6.87l7.18 33.61c.63 3.69-3.24 6.51-6.56 4.76L67.56 102a7.03 7.03 0 0 0-7.12 0l-28.62 16.75c-3.31 1.74-7.19-1.07-6.56-4.76l7.18-33.61c.54-2.55-.36-5.19-2.36-6.87L5.37 52.78c-2.68-2.61-1.2-7.17 2.5-7.71l32.79-2.94a7.05 7.05 0 0 0 5.82-4.19l13.46-30.7c1.67-3.36 6.45-3.36 8.11-.01"/><path fill="#ffff8d" d="m67.07 39.77l-2.28-22.62c-.09-1.26-.35-3.42 1.67-3.42c1.6 0 2.47 3.33 2.47 3.33l6.84 18.16c2.58 6.91 1.52 9.28-.97 10.68c-2.86 1.6-7.08.35-7.73-6.13"/><path fill="#f4b400" d="M95.28 71.51L114.9 56.2c.97-.81 2.72-2.1 1.32-3.57c-1.11-1.16-4.11.51-4.11.51l-17.17 6.71c-5.12 1.77-8.52 4.39-8.82 7.69c-.39 4.4 3.56 7.79 9.16 3.97"/></svg></h1>
+                <h1>Comments:</h1>
+                <h1 class ="bg-stone-400 p-2 rounded">{{items["WrittenReview"]}}</h1>
+                <h1>{{items["TimeStamp"].strftime('%x')}}</h1>
+            {%endfor%}
+            </div>
+        </div>
+       
+    </div>
 </div>
 
 </body>
