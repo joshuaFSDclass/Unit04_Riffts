@@ -7,19 +7,41 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
 </head>
-<body>
+<body class="bg-linear-to-r from-gray-400 to-stone-800">
 {% include "components/navbar.html.jinja" %}
 
-
-<h2 class="items-center p-4 text-center text-4xl">Best Sellers</h2>
-
-<div class = "">
-    <p>1</p>
-    <p>2</p>
-    <p>3</p>
-    <p>4</p>
-    <p>5</p>
+<div class="p-5 mt-4 flex cols-2">
+    <div class =" ">
+        <h1 class="text-white text-7xl w-200 font-bold text-shadow-lg pb-10">FIND YOUR PERFECT GUTAR</h1>
+        <a href ="/browse"class="text-4xl text-center p-1 rounded w-85 bg-white font-bold text-red-700">SHOP NOW</a>
+    </div>
+    <div><img class="size-250 "src="/static/products/guitars/guitars fr.png" alt="guitar"></div>
+    
 </div>
+<div class="grid grid-col-2 text-white text-7xl w-200 font-bold text-center">
+    <h1>FEATURED GUITARS</h1>
+    <h2>Gibson collection</h2>
+    <div class="">
+        <img class="size-50" src="static/products/guitars/featured-homepage.png" alt="featured guitar">
+        <h1 class="text-lg">
+            Gibson lespaul
+        </h1>
+    </div>
+    <div>
+        <img class="size-50" src="static/products/guitars/featured-homepage2.png" alt="featured guitar">
+        <h1 class="text-lg">
+            Gibson lespaul
+        </h1>
+    </div>
+    <div>
+        <img class="size-50" src="static/products/guitars/featured-homepage3.png" alt="featured guitar">
+        <h1 class="text-lg">
+            Gibson lespaul
+        </h1>
+    </div>
+</div>
+
+
 
 </body>
 </html>

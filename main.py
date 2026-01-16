@@ -101,8 +101,12 @@ def product_page(product_id):
 
     for item in reviews:
         avgReview += item["Rattings"] 
+    try:
+        avgReview = avgReview / len(reviews)
+    except ZeroDivisionError:
+        avgReview = 0
+        
     
-    avgReview = avgReview / len(reviews)
 
     return render_template("product.html.jinja", product = result, reviews = reviews, avgReview = avgReview)
 
